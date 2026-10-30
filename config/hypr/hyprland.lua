@@ -11,7 +11,7 @@ hl.monitor({
 -------------------
 ---- VARIABLES ----
 -------------------
-local terminal    = "kitty"
+local terminal    = "ghostty"
 local fileManager = "dolphin"
 local menu        = "wofi --show drun"
 local notifications = "swaync-client --open-panel"
@@ -22,7 +22,7 @@ local locker  = "hyprlock"
 -------------------
 ---- AUTOSTART ----
 -------------------
-hl.on("hyprland.start", function () 
+hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("nm-applet")
     hl.exec_cmd("blueman-tray")
@@ -45,8 +45,8 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -----------------------
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = 10,
+        gaps_in  = 4,
+        gaps_out = 5,
 
         border_size = 2,
 
@@ -54,12 +54,12 @@ hl.config({
             ---------------
             --- Gruvbox ---
             ---------------
-            active_border = { 
+            active_border = {
                 colors = {
-                    "rgb(cba6f7)",
-		   	        "rgb(89dceb)"
-                }, 
-                angle = 45 
+                    "rgb(b4befe)",
+		   	        -- "rgb(89dceb)"
+                },
+                angle = 45
             },
 
             inactive_border = "rgba(595959aa)",
@@ -80,7 +80,7 @@ hl.config({
         shadow = {
             enabled      = true,
             range        = 6,
-            render_power = 5,
+            render_power = 4,
             color        = 0xee1a1a1a,
         },
 
@@ -89,11 +89,45 @@ hl.config({
             size      = 3,
             passes    = 4,
             vibrancy  = 0.1996,
+--            water = {
+--                damping = 0.95,
+--                duration = 12.0,
+--                radius = 20.0,
+--                speed = 0.76,
+--                strength = 32.0
+--            },
+
+            acrylic = {
+                aberration = 0.25,
+                bulb = 256.0,
+                clarity = 1.0,
+                refraction = 24.0,
+                tint = 0x14EEF5FF
+            },
+        },
+
+        wobble = {
+            enabled = true,
+            mesh = 32,
+            stiffness = 100,
+        },
+
+        glow = {
+            enabled = true,
+            color = "rgb(bfbefe)",
+            range = 5,
+            render_power = 4
+        },
+
+        motion_blur = {
+            enabled = true,
+            samples = 2
         },
     },
 
     animations = {
         enabled = true,
+        workspace_wraparound = true,
     },
 })
 
@@ -235,6 +269,38 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
+hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" }))
+
+hl.bind("SUPER + D", function()
+    hl.dispatch(hl.dsp.submap("resize"))
+end)
+
+hl.define_submap("resize", function()
+    hl.bind("right", hl.dsp.window.resize({
+        x = 10, y = 0, relative = true
+    }), { repeating = true })
+
+    hl.bind("left", hl.dsp.window.resize({
+        x = -10, y = 0, relative = true
+    }), { repeating = true })
+
+    hl.bind("down", hl.dsp.window.resize({
+        x = 0, y = 10, relative = true
+    }), { repeating = true })
+
+    hl.bind("up", hl.dsp.window.resize({
+        x = 0, y = -10, relative = true
+    }), { repeating = true })
+
+    -- Esc возвращает обычные бинды
+    hl.bind("escape", function()
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+end)
+
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
@@ -253,7 +319,7 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Laptop multimedia keys for volume and LCD brightness 
+-- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
@@ -266,9 +332,6 @@ hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = tr
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
-
-hl.bind("ALT + SHIFT", hl.dsp.exec_cmd("hyprctl switchxkblayout semico---usb-gaming-keyboard--keyboard next"))
-hl.bind("ALT + SHIFT", hl.dsp.exec_cmd("hyprctl switchxkblayout hp-wmi-hotkeys next"))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----

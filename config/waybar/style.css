@@ -1,2 +1,5 @@
-/* Catppuccin Mocha */
+/* Catppuccin Mocha
 @import url("./styles/mocha.css");
+*/
+
+@import url("./styles/tokyonight.css");

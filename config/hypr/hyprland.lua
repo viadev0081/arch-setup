@@ -12,7 +12,7 @@ hl.monitor({
 ---- VARIABLES ----
 -------------------
 local terminal    = "ghostty"
-local fileManager = "dolphin"
+local fileManager = "nautilus"
 local menu        = "wofi --show drun"
 local notifications = "swaync-client --open-panel"
 local picker = "hyprpicker -an"
@@ -23,14 +23,13 @@ local locker  = "hyprlock"
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("hyprpaper")
+--    hl.exec_cmd("hyprpaper")
     hl.exec_cmd("nm-applet")
-    hl.exec_cmd("blueman-tray")
-    hl.exec_cmd("blueman-applet")
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("pipewire &")
-    hl.exec_cmd("pipewire-pulse &")
-    hl.exec_cmd("wireplumber &")
+--    hl.exec_cmd("waybar")
+--    hl.exec_cmd("pipewire &")
+--    hl.exec_cmd("pipewire-pulse &")
+--    hl.exec_cmd("wireplumber &")
+    hl.exec_cmd("noctalia")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 end)
 
@@ -51,13 +50,11 @@ hl.config({
         border_size = 2,
 
         col = {
-            ---------------
-            --- Gruvbox ---
-            ---------------
             active_border = {
                 colors = {
-                    "rgb(b4befe)",
-		   	        -- "rgb(89dceb)"
+                    -- "rgb(b4befe)",
+                    "rgb(89b4fa)",
+                    "rgb(7dd79b)",
                 },
                 angle = 45
             },
@@ -71,11 +68,11 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 4,
-        rounding_power = 4,
+        rounding       = 3,
+        rounding_power = 3,
 
-        active_opacity   = 0.96,
-        inactive_opacity = 0.96,
+        active_opacity   = 0.989,
+        inactive_opacity = 0.989,
 
         shadow = {
             enabled      = true,
@@ -89,13 +86,15 @@ hl.config({
             size      = 3,
             passes    = 4,
             vibrancy  = 0.1996,
---            water = {
---                damping = 0.95,
---                duration = 12.0,
---                radius = 20.0,
---                speed = 0.76,
---                strength = 32.0
---            },
+            variant   = "water",
+
+            water = {
+                damping = 0.95,
+                duration = 12.0,
+                radius = 20.0,
+                speed = 0.76,
+                strength = 32.0
+            },
 
             acrylic = {
                 aberration = 0.25,
@@ -113,9 +112,9 @@ hl.config({
         },
 
         glow = {
-            enabled = true,
+            enabled = false,
             color = "rgb(bfbefe)",
-            range = 5,
+            range = 2,
             render_power = 4
         },
 
@@ -142,7 +141,7 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
-hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
+hl.animation({ leaf = "global",        enabled = true,  speed = 5,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 4.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
 hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.9,  spring = "easy",         style = "popin 87%" })
@@ -158,7 +157,7 @@ hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "
 hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 3.21, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
+hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 3.5,    bezier = "quick" })
 
 ---------------
 --- LAYOUTS ---
@@ -309,7 +308,7 @@ end
 
 -- Screenshots
 -- hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grim"))
-hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("~/scripts/screen.sh"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("~/scripts/screen.sh"))
 
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))

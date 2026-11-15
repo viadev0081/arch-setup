@@ -1,0 +1,81 @@
+[theme]
+mode = "dark"
+
+[bar.default]
+position     = "top"
+thickness    = 40
+margin_ends  = 0        # 0 = панель на всю ширину; 100 (по умолчанию) = с отступами по краям
+radius = 0            # раскомментируйте, если нужны прямые углы вместо скруглённых
+
+[shell]
+corner_radius_scale   = 1.0             # 0 = square, 1 = default, 2 = extra rounded
+button_borders        = true            # draw outlines around buttons throughout the shell
+input_borders         = true            # draw outlines around text fields and other inputs
+popup_borders         = true            # draw outlines around popups and dropdowns (dialogs always have outlines)
+card_borders          = true            # draw outlines around section cards inside panels and settings
+show_close_buttons    = true            # show close buttons on shell surfaces (panels, toasts, popups, dialogs, Settings)
+popup_shadows         = true            # draw drop shadows behind popups and dropdowns
+font_family           = "AdwaitaMono Nerd Font"    # Pango family string; Fontconfig handles fallback
+lang                  = ""              # empty = auto-detect; otherwise BCP-47 or POSIX locale
+time_format           = "{:%H:%M}"      # default time format for shell UI without its own setting
+date_format           = "%A, %x"        # default date format for shell UI without its own setting
+offline_mode          = false           # block all outgoing HTTP requests
+# panel_anchor_bar   = "main"           # bar every panel attaches to, overriding the source bar; omit = per-source
+external_ip_enabled   = false           # resolve the WAN IP for the Control Center network tab and network widget tooltip
+telemetry_enabled     = false           # anonymous startup ping
+setup_wizard_enabled = true              # open first-run wizard while the marker is missing
+niri_overview_type_to_launch_enabled = false # niri-only type-to-launch from overview
+umbriel_overview_type_to_launch_enabled = false # umbriel-only type-to-launch from overview
+polkit_colorize_icons = false           # tint application icons in authentication prompts
+polkit_agent          = false           # register Noctalia's native polkit authentication agent
+password_style        = "default"       # default | random
+readline_shortcuts    = false           # readline-style shortcuts in every text field
+avatar_path           = "~/Pictures/avatar.png"
+circular_avatar       = true
+settings_show_advanced = true           # show advanced settings by default in Settings
+settings_expand_all_groups = false      # expand every Settings group by default
+settings_window_translucent = false     # translucent Settings window background
+show_location         = true            # show weather location text in shell UI
+launch_apps_as_systemd_services = false # launch apps as transient systemd services (needs Noctalia to be a user unit)
+launch_apps_custom_command = ""         # wrap launched apps; $CMD is replaced with the app command
+screen_time_colorize_icons = false      # tint application icons in Screen Time
+screen_time_enabled   = false           # track per-app usage time for the Control Center screen-time view
+app_icon_color        = "on_surface"    # shared tint for components with colorize_icons enabled
+clipboard_enabled     = true            # false disables clipboard history/panel (basic copy & paste still work)
+clipboard_keep_from_closed_apps = true  # keep the live selection after its source application closes
+clipboard_history_max_entries = 100     # unpinned history cap (10–10000); pinned entries are exempt
+clipboard_confirm_clear_history = true  # confirm before clear history / delete unpinned entries
+clipboard_auto_paste  = "auto"          # off | auto | ctrl_v | ctrl_shift_v | shift_insert
+clipboard_image_action_command = ""     # image clipboard action; e.g. "gimp {path}" or "satty -f -"
+shared_gl_context     = true            # startup-only; share GPU textures across surfaces
+disable_mipmaps       = false           # startup-only; disable texture mipmaps if downscaled icons/wallpaper show GPU artifacts
+
+[shell.panel]
+transparency_mode     = "glass"  # solid | soft | glass; controls floating panel opacity and card translucency
+borders               = true   # outline on floating panel surfaces
+border_color          = "outline_variant"   # floating panel outline color: theme role token or #RRGGBB
+border_width          = 1.0         # floating panel outline width in px, 0 hides the stroke
+shadow                = true   # cast the global [shell.shadow] from panel surfaces
+list_item_background  = false  # filled rounded background behind launcher and clipboard list items
+wallpaper_show_names  = true   # caption wallpaper picker thumbnails with their file name
+floating_layer         = "top" # overlay | top; applies to floating interactive panels
+launcher_placement       = "floating" # attached | floating
+clipboard_placement      = "floating" # attached | floating
+control_center_placement = "attached" # attached | floating
+wallpaper_placement      = "attached" # attached | floating
+session_placement        = "attached" # attached | floating
+polkit_placement         = "floating" # attached | floating
+launcher_position        = "center"   # auto | center | top_left | …
+clipboard_position       = "center"   # auto | center | top_left | …
+control_center_position  = "auto"     # auto | center | top_left | …
+polkit_position          = "center"   # auto | center | top_left | …
+floating_offset          = 8           # px gap between a floating panel and the bar edge
+open_near_click_control_center = false  # attached/floating: open near the clicked bar widget instead of at *_position
+open_near_click_launcher       = false  # attached/floating: open near the clicked bar widget instead of at *_position
+open_near_click_clipboard      = false  # attached/floating: open near the clicked bar widget instead of at *_position
+open_near_click_wallpaper      = false  # attached/floating: open near the clicked bar widget instead of at *_position
+open_near_click_session        = false  # attached/floating: open near the clicked bar widget instead of at *_position
+
+[wallpaper]
+directory = "~/walls"          # папка, которую показывает панель выбора обоев
+fill_mode = "crop"             # center | crop | fit | stretch | repeat | span

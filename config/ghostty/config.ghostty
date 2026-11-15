@@ -1,4 +1,6 @@
-theme = catppuccin.conf
+# theme = catppuccin.conf
+theme = noctalia
+# theme = TokyoNight
 
 font-family = JetBrainsMono Nerd Font
 font-style = Bold
@@ -9,8 +11,8 @@ confirm-close-surface = false
 window-padding-x = 0
 window-padding-y = 0
 
-custom-shader = /home/viadev0081/.config/ghostty/shaders/cursor_glide.glsl
-#custom-shader = /home/viadev0081/.config/ghostty/shaders/wave.glsl
-custom-shader-animation = true
+# custom-shader = /home/viadev0081/.config/ghostty/shaders/cursor_glide.glsl
+# custom-shader = /home/viadev0081/.config/ghostty/shaders/wave.glsl
+# custom-shader-animation = true
 
-# background-opacity = 0.955
+background-opacity = 0.985
